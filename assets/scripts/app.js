@@ -1,6 +1,7 @@
 const PLAYER_ATTACK_VALUE = 10;
 const MONSTER_ATTACK_VALUE = 12;
 const PLAYER_STRONG_ATTACK_VALUE = 15;
+const HEAL_PLAYER_VALUE = 20;
 let chosenMaxLife = 100;
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
@@ -35,5 +36,19 @@ function strongAttackHandler() {
     attackMonster("STRONG_ATTACK");
 }
 
+function healPlayerHandler() {
+    let healValue;
+    if (currentPlayerHealth >= chosenMaxLife - HEAL_PLAYER_VALUE) {
+        alert("You can't heal more than your current value.")
+        healValue = chosenMaxLife - currentPlayerHealth;
+    } else {
+        healValue = HEAL_PLAYER_VALUE;
+    }
+    increasePlayerHealth(healValue);
+    currentPlayerHealth += healValue;
+    console.log(currentMonsterHealth, currentPlayerHealth);
+}
+
 attackBtn.addEventListener('click', attackHandler);
 strongAttackBtn.addEventListener('click', strongAttackHandler);
+healBtn.addEventListener('click', healPlayerHandler);
