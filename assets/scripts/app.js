@@ -6,9 +6,11 @@ let chosenMaxLife = 100;
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 let playerAttackMode;
+let hasBonusLife = true;
 adjustHealthBars(chosenMaxLife);
 
 function attackMonster(mode) {
+    let initialPlayerHealth = currentPlayerHealth;
     if (mode == "ATTACK") {
         playerAttackMode = PLAYER_ATTACK_VALUE;
     } else if (mode == "STRONG_ATTACK") {
@@ -18,12 +20,20 @@ function attackMonster(mode) {
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE)
     currentMonsterHealth -= monsterDamage;
     currentPlayerHealth -= playerDamage;
+    if (currentPlayerHealth <= 0 && hasBonusLife) {
+        hasBonusLife = false;
+        removeBonusLife();
+        currentPlayerHealth = initialPlayerHealth;
+        alert("You are alive as you have a bonus life.")
+        setPlayerHealth(initialPlayerHealth);
+    }
+
     console.log(currentMonsterHealth, currentPlayerHealth);
     if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
         alert("You won!");
     } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
         alert("You lost!");
-    } else if (currentPlayerHealth < 0 && currentMonsterHealth < 0) {
+    } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
         alert("You have a draw!");  
     }
 }
