@@ -20,13 +20,17 @@ let hasBonusLife = true;
 adjustHealthBars(chosenMaxLife, MAX_LIFE);
 
 function attackMonster(mode) {
-    let initialPlayerHealth = currentPlayerHealth;
-    let initialMonsterHealth = currentMonsterHealth;
     if (mode == MODE_ATTACK) {
         playerAttackMode = PLAYER_ATTACK_VALUE;
     } else if (mode == MODE_STRONG_ATTACK) {
         playerAttackMode = PLAYER_STRONG_ATTACK_VALUE;
     }
+    endGame();
+}
+
+function endGame() {
+    let initialPlayerHealth = currentPlayerHealth;
+    let initialMonsterHealth = currentMonsterHealth;
     const monsterDamage = dealMonsterDamage(playerAttackMode);
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE)
     currentMonsterHealth -= monsterDamage;
