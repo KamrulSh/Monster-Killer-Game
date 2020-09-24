@@ -29,6 +29,7 @@ function attackMonster(mode) {
         alert("You are alive as you have a bonus life.")
         setPlayerHealth(initialPlayerHealth);
         setMonsterHealth(initialMonsterHealth);
+        alert("Now you can heal! Enjoy!");
     }
 
     console.log(currentMonsterHealth, currentPlayerHealth);
@@ -50,16 +51,21 @@ function strongAttackHandler() {
 }
 
 function healPlayerHandler() {
-    let healValue;
-    if (currentPlayerHealth >= chosenMaxLife - HEAL_PLAYER_VALUE) {
-        alert("You can't heal more than your current value.")
-        healValue = chosenMaxLife - currentPlayerHealth;
+
+    if (hasBonusLife) {
+        alert("You can't heal now. You can use heal with your bonus point.");
     } else {
-        healValue = HEAL_PLAYER_VALUE;
+        let healValue;
+        if (currentPlayerHealth >= chosenMaxLife - HEAL_PLAYER_VALUE) {
+            alert("You can't heal more than your current value.")
+            healValue = chosenMaxLife - currentPlayerHealth;
+        } else {
+            healValue = HEAL_PLAYER_VALUE;
+        }
+        increasePlayerHealth(healValue);
+        currentPlayerHealth += healValue;
+        console.log(currentMonsterHealth, currentPlayerHealth);
     }
-    increasePlayerHealth(healValue);
-    currentPlayerHealth += healValue;
-    console.log(currentMonsterHealth, currentPlayerHealth);
 }
 
 attackBtn.addEventListener('click', attackHandler);
