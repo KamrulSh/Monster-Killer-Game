@@ -2,12 +2,20 @@ const PLAYER_ATTACK_VALUE = 10;
 const MONSTER_ATTACK_VALUE = 12;
 const PLAYER_STRONG_ATTACK_VALUE = 15;
 const HEAL_PLAYER_VALUE = 20;
-let chosenMaxLife = 100;
+const MAX_LIFE = 100;
+
+const userInputedLife = prompt("Input life for Player and monster", "100");
+let chosenMaxLife = parseInt(userInputedLife);
+if (chosenMaxLife <= 0 || isNaN(chosenMaxLife) || chosenMaxLife >= 100) {
+    alert("Inputed life is not valid! Your default value is 100");
+    chosenMaxLife = 100;
+}
+
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 let playerAttackMode;
 let hasBonusLife = true;
-adjustHealthBars(chosenMaxLife);
+adjustHealthBars(chosenMaxLife, MAX_LIFE);
 
 function attackMonster(mode) {
     let initialPlayerHealth = currentPlayerHealth;

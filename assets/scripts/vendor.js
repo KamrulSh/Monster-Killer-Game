@@ -7,11 +7,11 @@ const strongAttackBtn = document.getElementById('strong-attack-btn');
 const healBtn = document.getElementById('heal-btn');
 const logBtn = document.getElementById('log-btn');
 
-function adjustHealthBars(maxLife) {
+function adjustHealthBars(inputedLife, maxLife) {
   monsterHealthBar.max = maxLife;
-  monsterHealthBar.value = maxLife;
+  monsterHealthBar.value = inputedLife;
   playerHealthBar.max = maxLife;
-  playerHealthBar.value = maxLife;
+  playerHealthBar.value = inputedLife;
 }
 
 function dealMonsterDamage(damage) {
