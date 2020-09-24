@@ -42,3 +42,7 @@ function removeBonusLife() {
 function setPlayerHealth(health) {
   playerHealthBar.value = health;
 }
+
+function setMonsterHealth(health) {
+  monsterHealthBar.value = health;
+}

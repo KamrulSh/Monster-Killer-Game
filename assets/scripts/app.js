@@ -11,6 +11,7 @@ adjustHealthBars(chosenMaxLife);
 
 function attackMonster(mode) {
     let initialPlayerHealth = currentPlayerHealth;
+    let initialMonsterHealth = currentMonsterHealth;
     if (mode == "ATTACK") {
         playerAttackMode = PLAYER_ATTACK_VALUE;
     } else if (mode == "STRONG_ATTACK") {
@@ -24,8 +25,10 @@ function attackMonster(mode) {
         hasBonusLife = false;
         removeBonusLife();
         currentPlayerHealth = initialPlayerHealth;
+        currentMonsterHealth = initialMonsterHealth;
         alert("You are alive as you have a bonus life.")
         setPlayerHealth(initialPlayerHealth);
+        setMonsterHealth(initialMonsterHealth);
     }
 
     console.log(currentMonsterHealth, currentPlayerHealth);
