@@ -6,7 +6,7 @@ const MAX_LIFE = 100;
 
 const userInputedLife = prompt("Input life for Player and monster", "100");
 let chosenMaxLife = parseInt(userInputedLife);
-if (chosenMaxLife <= 0 || isNaN(chosenMaxLife) || chosenMaxLife >= 100) {
+if (chosenMaxLife <= 0 || isNaN(chosenMaxLife) || chosenMaxLife > 100) {
     alert("Inputed life is not valid! Your default value is 100");
     chosenMaxLife = 100;
 }
@@ -48,6 +48,10 @@ function attackMonster(mode) {
     } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
         alert("You have a draw!");  
     }
+
+    if (currentPlayerHealth <= 0 || currentMonsterHealth <= 0) {
+        resetNewGame();
+    }
 }
 
 function attackHandler() {
@@ -74,6 +78,12 @@ function healPlayerHandler() {
         currentPlayerHealth += healValue;
         console.log(currentMonsterHealth, currentPlayerHealth);
     }
+}
+
+function resetNewGame() {
+    currentPlayerHealth = chosenMaxLife;
+    currentMonsterHealth = chosenMaxLife;
+    adjustHealthBars(chosenMaxLife, MAX_LIFE);
 }
 
 attackBtn.addEventListener('click', attackHandler);
