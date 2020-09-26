@@ -27,13 +27,16 @@ let battleLog = [];
 let logPlayerAttack;
 
 function attackMonster(mode) {
-    if (mode == MODE_ATTACK) {
-        playerAttackMode = PLAYER_ATTACK_VALUE;
-        logPlayerAttack = LOG_PLAYER_ATTACK;
-    } else if (mode == MODE_STRONG_ATTACK) {
-        playerAttackMode = PLAYER_STRONG_ATTACK_VALUE;
-        logPlayerAttack = LOG_PLAYER_STRONG_ATTACK;
-    }
+    // ternary expression
+    playerAttackMode = mode === MODE_ATTACK ? PLAYER_ATTACK_VALUE : PLAYER_STRONG_ATTACK_VALUE;
+    logPlayerAttack = mode === MODE_ATTACK ? LOG_PLAYER_ATTACK: LOG_PLAYER_STRONG_ATTACK;
+    // if (mode == MODE_ATTACK) {
+    //     playerAttackMode = PLAYER_ATTACK_VALUE;
+    //     logPlayerAttack = LOG_PLAYER_ATTACK;
+    // } else if (mode == MODE_STRONG_ATTACK) {
+    //     playerAttackMode = PLAYER_STRONG_ATTACK_VALUE;
+    //     logPlayerAttack = LOG_PLAYER_STRONG_ATTACK;
+    // }
     const monsterDamage = dealMonsterDamage(playerAttackMode);
     currentMonsterHealth -= monsterDamage;
     writeAttackLog(logPlayerAttack, monsterDamage, currentPlayerHealth, currentMonsterHealth);
