@@ -117,17 +117,39 @@ function writeAttackLog(event, value, playerHealth, monsterHealth) {
         finalPlayerHealth: playerHealth,
         finalMonsterHealth: monsterHealth
     };
-    if (event === LOG_PLAYER_ATTACK) {
-        logEntry.destroy = "MONSTER";
-    } else if (event === LOG_PLAYER_STRONG_ATTACK) {
-        logEntry.destroy = "MONSTER";
-    } else if (event === LOG_MONSTER_ATTACK) {
-        logEntry.destroy = "PLAYER";
-    } else if (event === LOG_PLAYER_HEAL) {
-        logEntry.player = "HEALED";
-    } else if (event === LOG_GAME_OVER) {
-        logEntry.gameOver = "FINISH";
+    // if (event === LOG_PLAYER_ATTACK) {
+    //     logEntry.destroy = "MONSTER";
+    // } else if (event === LOG_PLAYER_STRONG_ATTACK) {
+    //     logEntry.destroy = "MONSTER";
+    // } else if (event === LOG_MONSTER_ATTACK) {
+    //     logEntry.destroy = "PLAYER";
+    // } else if (event === LOG_PLAYER_HEAL) {
+    //     logEntry.player = "HEALED";
+    // } else if (event === LOG_GAME_OVER) {
+    //     logEntry.gameOver = "FINISH";
+    // }
+
+    // switch case statement
+    switch(event) {
+        case LOG_PLAYER_ATTACK:
+            logEntry.destroy = "MONSTER";
+            break;
+        case LOG_PLAYER_STRONG_ATTACK:
+            logEntry.destroy = "MONSTER";
+            break;
+        case LOG_MONSTER_ATTACK:
+            logEntry.destroy = "PLAYER";
+            break;
+        case LOG_PLAYER_HEAL:
+            logEntry.player = "HEALED";
+            break;
+        case LOG_GAME_OVER:
+            logEntry.gameOver = "FINISH";
+            break;
+        default:
+            logEntry = {};
     }
+     
     battleLog.push(logEntry);
 }
 
