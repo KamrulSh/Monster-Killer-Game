@@ -11,11 +11,26 @@ const LOG_MONSTER_ATTACK = "MONSTER_ATTACK";
 const LOG_PLAYER_HEAL = "PLAYER_HEAL";
 const LOG_GAME_OVER = "GAME_OVER";
 
-const userInputedLife = prompt("Input life for Player and monster", "100");
-let chosenMaxLife = parseInt(userInputedLife);
-if (chosenMaxLife <= 0 || isNaN(chosenMaxLife) || chosenMaxLife > 100) {
-    alert("Inputed life is not valid! Your default value is 100");
+// function for taking user inputed life for player and monster
+let chosenMaxLife;
+function maxInputValues() {
+    const userInputedLife = prompt("Input life for Player and monster", "100");
+    chosenMaxLife = parseInt(userInputedLife);
+    if (chosenMaxLife <= 0 || isNaN(chosenMaxLife)) {
+        throw {message: "Input is not valid."};
+    } else if (chosenMaxLife > 100) {
+        throw {message: "Input can't more than 100"};
+    }
+    return chosenMaxLife;
+}
+
+// this is for handling user input to input value and show error msg  
+try {
+    chosenMaxLife = maxInputValues();
+} catch (error) {
+    console.log(error);
     chosenMaxLife = 100;
+    alert("You typed somthing wrong. Set default value to 100.");
 }
 
 let currentMonsterHealth = chosenMaxLife;
@@ -54,7 +69,7 @@ function endGame() {
         removeBonusLife();
         currentPlayerHealth = initialPlayerHealth;
         currentMonsterHealth = initialMonsterHealth;
-        alert("You are alive as you have a bonus life.")
+        alert("You are alive as you have a bonus life.");
         setPlayerHealth(initialPlayerHealth);
         setMonsterHealth(initialMonsterHealth);
         alert("Now you can heal! Enjoy!");
@@ -155,6 +170,14 @@ function writeAttackLog(event, value, playerHealth, monsterHealth) {
 
 function printLogHandler() {
     console.log(battleLog);
+    let i = 0;
+    for (logEntry of battleLog) {
+        console.log("#"+ i + "-----------------");
+        for (key in logEntry) {
+            console.log(key + " => " + logEntry[key]);
+        }
+        i++;
+    }
 }
 
 attackBtn.addEventListener('click', attackHandler);
